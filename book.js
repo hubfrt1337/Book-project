@@ -1,19 +1,5 @@
 
 const table = document.querySelector(".tablica");
-table.innerHTML = `<tr>
-<th>Title</th>
-<th>Author</th>
-<th>Pages</th>
-<th>Whether</th>
-<th>Delete</th>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td class="x"></td>
-</tr>`
 
 
 function Book(title, author, pages, whether, id){
@@ -50,16 +36,19 @@ function showTable(){
         html +=`<tr>
         <td>${bok.title}</td>
         <td>${bok.author}</td>
-        <td>${bok.pages}</td>
-        <td class='status' data-id='${bok.id}'>${bok.whether}</td>
-        <td class='deleteJs' data-id='${bok.id}'>x</td>
+        <td class="pages">${bok.pages}</td>
+        <td class="td-whether">
+        <div>${bok.whether}</div>
+        <i class="fa-solid fa-rotate status" data-id='${bok.id}'></i>
+        </td>
+        <td class="td-x"><span class='deleteJs' data-id='${bok.id}'>X</span></td>
         </tr>`
     })
     table.innerHTML = `<tr>
 <th>Title</th>
 <th>Author</th>
-<th>Pages</th>
-<th>Whether</th>
+<th class="pages">Pages</th>
+<th>Read</th>
 <th>Delete</th>
 </tr> ${html}`
     x = document.querySelectorAll('.deleteJs')
@@ -90,6 +79,9 @@ submit.addEventListener('click', function(event){
     author = document.getElementById("author").value;
     pages = document.getElementById("pages").value;
     stat = document.getElementById("whether").value;
+    if(stat === ''){
+        stat = "not read yet"
+    }
     addBookToLibrary(title,author,pages,stat);
     showTable();
     dialog.close()
@@ -134,7 +126,6 @@ function stLoop(){
     }) 
 }
 
-
-
-
+addBookToLibrary("The Lion, the Witch and the Wardrobe", "C. S. Lewis", "172", "has been read");
+showTable();
 
