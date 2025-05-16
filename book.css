@@ -1,6 +1,6 @@
 
  body{
-    background-image: url(/images/openBook.webp);
+    background-image: url(./images/openBook.webp);
     height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
@@ -56,11 +56,6 @@ tr:nth-child(even){
     text-align: center;
     font-weight: bold;
     
-}
-
-.td-whether{
-  
-   
 }
 
 .td-whether > div{
