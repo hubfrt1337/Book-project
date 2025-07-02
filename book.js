@@ -2,12 +2,14 @@
 const table = document.querySelector(".tablica");
 
 
-function Book(title, author, pages, whether, id){
+class Book{
+    constructor(title, author, pages, whether, id){
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.whether = whether;
-    this.id = id
+    this.id = id;
+    }
 
 }
 Book.prototype.changeStatus = function(){
@@ -21,8 +23,12 @@ Book.prototype.changeStatus = function(){
 }
 
 function addBookToLibrary(title, author, pages, whether){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.whether = whether;
   let uuid = crypto.randomUUID();
-  let id = uuid
+  let id = uuid;
   uuid = new Book(title, author, pages, whether, id)
    library.push(uuid)
   
@@ -41,7 +47,7 @@ function showTable(){
         <div>${bok.whether}</div>
         <i class="fa-solid fa-rotate status" data-id='${bok.id}'></i>
         </td>
-        <td class="td-x"><span class='deleteJs' data-id='${bok.id}'>X</span></td>
+        <td class="tdx"><span class='deleteJs' data-id='${bok.id}'>X</span></td>
         </tr>`
     })
     table.innerHTML = `<tr>
@@ -79,7 +85,11 @@ submit.addEventListener('click', function(event){
     author = document.getElementById("author").value;
     pages = document.getElementById("pages").value;
     stat = document.getElementById("whether").value;
-    if(stat === ''){
+    form = document.querySelector("form")
+    if(!form.checkValidity()){
+        form.reportValidity();
+    } else {
+         if(stat === ''){
         stat = "not read yet"
     }
     addBookToLibrary(title,author,pages,stat);
@@ -88,6 +98,7 @@ submit.addEventListener('click', function(event){
     xLoop();
     console.log(statusOfRead)
     stLoop();
+    }
 })
 
 table.addEventListener('click', function(){
